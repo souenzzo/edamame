@@ -16,3 +16,5 @@ pom.xml.asc
 /cljs-test-runner-out
 /sci
 /cljs-opts.edn
+*.iml
+/.idea/

@@ -118,7 +118,7 @@
         (if (nil? ch)
           (throw-reader reader "Error while parsing regex")
           (do
-            (.append sb ch )
+            (.append sb ch)
             (when (identical? \\ ch)
               (let [ch (r/read-char reader)]
                 (when (nil? ch)
@@ -363,7 +363,9 @@
                      (v next-val)
                      (list 'quote next-val))))
                ;; quote is allowed in normal EDN
-               (edn-read ctx reader))
+               (do
+                 (r/read-char reader)
+                 (parse-next ctx reader)))
           \` (if-let [v (get ctx :syntax-quote)]
                (do
                  (r/read-char reader) ;; skip `
@@ -529,5 +531,5 @@
 
 ;;;; Scratch
 
-(comment
-  )
+(comment)
+

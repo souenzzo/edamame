@@ -10,6 +10,9 @@
   (is (= "foo" (p/parse-string "\"foo\"")))
   (is (= 'foo (p/parse-string "foo")))
 
+  (is (= ()
+         (p/parse-string "'()")))
+
   (is (= :foo (p/parse-string ":foo")))
   (is (= :foo/bar (p/parse-string ":foo/bar")))
   (is (= '(1 2 3) (p/parse-string "(1 2 3)")))
@@ -187,7 +190,7 @@
   ;; TODO: fix locations of namespaced maps
   (is (= #:foo{:a 1} (p/parse-string "#:foo{:a 1}")))
   (is (= {:bar/dude 1, :foo.foo/a 1}
-         (p/parse-string "#::foo{:a 1 :bar/dude 1}" '{:auto-resolve {foo foo.foo}}))) )
+         (p/parse-string "#::foo{:a 1 :bar/dude 1}" '{:auto-resolve {foo foo.foo}}))))
 
 ;;;; Scratch
 
@@ -196,5 +199,5 @@
   #?(:clj
      (let [edn-string (slurp "deps.edn")]
        (time (dotimes [_ 10000]
-               (p/parse-string edn-string)))))
-  )
+               (p/parse-string edn-string))))))
+
